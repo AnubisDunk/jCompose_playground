@@ -49,10 +49,11 @@ import kotlinx.coroutines.launch
 
 enum class AppScreen(@StringRes val title: Int) {
     Start(title = R.string.app_name),
-    Calculator(title = R.string.calc),
-    Skins(title = R.string.heroes),
-    Conv(title = R.string.converter),
-    Jokes(title = R.string.jokesTitle)
+    State(title = R.string.statesScr),
+    Calculator(title = R.string.calcScr),
+    Skins(title = R.string.heroesScr),
+    Conv(title = R.string.converterScr),
+    Jokes(title = R.string.jokesScr)
 
 }
 
@@ -77,6 +78,16 @@ fun MainScreen(
                 DrawerItem(
                     onClick = {
                         navController.navigate(AppScreen.Start.name)
+                        scope.launch {
+                            drawerState.close()
+                        }
+                    },
+                    icon = Icons.Filled.Home,
+                    text = "Jetpack Compose Playground"
+                )
+                DrawerItem(
+                    onClick = {
+                        navController.navigate(AppScreen.State.name)
                         scope.launch {
                             drawerState.close()
                         }
@@ -166,13 +177,7 @@ fun DisplayNav(
     viewModel: GameViewModel,
     navController: NavHostController
 ) {
-    val viewCalcModel = viewModel<CalcViewModel>()
-    val state = viewCalcModel.state
 
-    val jokeApi = RetrofitInstance
-        .provideApi(RetrofitInstance.provideRetrofit())
-    val jokeRepo = JokesRepo(jokeApi)
-    val jokesViewModel = JokesViewModel(jokeRepo)
 
     NavHost(
         navController = navController,
@@ -196,7 +201,7 @@ fun DisplayNav(
         }
         composable(route = AppScreen.Jokes.name) {
             viewModel.titleText = "Jokes"
-            JokesScreen(jokesViewModel)
+            JokesScreen()
         }
     }
 }

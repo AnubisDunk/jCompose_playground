@@ -1,26 +1,17 @@
 package com.anubisdunk.mvvm.retrofitJokes
 
-import android.util.Log
-import androidx.compose.animation.core.LinearOutSlowInEasing
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -32,11 +23,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.anubisdunk.mvvm.retrofitJokes.api.RetrofitInstance
+import com.anubisdunk.mvvm.retrofitJokes.repo.JokesRepo
 
 
 @Composable
-fun JokesScreen(viewModel: JokesViewModel) {
-    val jokes by viewModel.jokes.collectAsState()
+fun JokesScreen() {
+    val jokeApi = RetrofitInstance
+        .provideApi(RetrofitInstance.provideRetrofit())
+    val jokeRepo = JokesRepo(jokeApi)
+    val jokesViewModel = JokesViewModel(jokeRepo)
+    val jokes by jokesViewModel.jokes.collectAsState()
     Column(
         modifier = Modifier
             .padding(16.dp)
@@ -58,9 +55,11 @@ fun JokesScreen(viewModel: JokesViewModel) {
                 .padding(16.dp)
                 .align(alignment = Alignment.BottomEnd),
 
-            onClick = { viewModel.fetchJoke() },
+            onClick = { jokesViewModel.fetchJoke() },
         ) {
-            Column {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Icon(Icons.Filled.Add, "Floating action button.")
                 Text(text = jokes.size.toString())
             }
@@ -79,7 +78,8 @@ fun Joke(joke: String) {
         ),
         modifier = Modifier
             .padding(horizontal = 16.dp, vertical = 4.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable {},
         elevation = CardDefaults.cardElevation(16.dp)
     ) {
         Text(

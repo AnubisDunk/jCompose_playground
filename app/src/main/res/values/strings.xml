@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">MVVM</string>
-    <string name="calc">Calculator Screen</string>
-    <string name="heroes">Heroes Screen</string>
-    <string name="converter">Converter Screen</string>
-    <string name="jokesTitle">Jokes Screen</string>
+    <string name="calcScr">Calculator Screen</string>
+    <string name="heroesScr">Heroes Screen</string>
+    <string name="converterScr">Converter Screen</string>
+    <string name="jokesScr">Jokes Screen</string>
+    <string name="statesScr">\"State screen\"</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.anubisdunk.mvvm.skins
 
 import android.content.Context
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +16,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -37,19 +40,24 @@ fun Skins() {
     var inputString = readAsset(context, "skindata.json")
     val skins = gson.fromJson(inputString, SkinData::class.java)
 
+    val localUriHandler = LocalUriHandler.current
+
     LazyColumn (
         modifier = Modifier
             .fillMaxHeight()
             .padding(horizontal = 16.dp),
     ) {
         items(skins) { skin ->
-            SkinComp(skin = skin)
+            SkinComp(skin = skin, localUriHandler)
         }
     }
 }
 
 @Composable
-fun SkinComp(skin: SkinData.SkinDataItem) {
+fun SkinComp(
+    skin: SkinData.SkinDataItem,
+    uri : UriHandler
+) {
     Card(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 16.dp
@@ -57,6 +65,7 @@ fun SkinComp(skin: SkinData.SkinDataItem) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
+            .clickable { uri.openUri(skin.skin_url) }
     ) {
         Column(
             modifier = Modifier

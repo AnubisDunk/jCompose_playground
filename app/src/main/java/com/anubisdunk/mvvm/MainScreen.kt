@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Place
@@ -44,6 +45,7 @@ import com.anubisdunk.mvvm.retrofitJokes.JokesViewModel
 import com.anubisdunk.mvvm.retrofitJokes.api.RetrofitInstance
 import com.anubisdunk.mvvm.retrofitJokes.repo.JokesRepo
 import com.anubisdunk.mvvm.skins.Skins
+import com.anubisdunk.mvvm.states.StatesScreen
 import com.anubisdunk.mvvm.ui.GameViewModel
 import kotlinx.coroutines.launch
 
@@ -92,8 +94,8 @@ fun MainScreen(
                             drawerState.close()
                         }
                     },
-                    icon = Icons.Filled.Home,
-                    text = "Jetpack Compose Playground"
+                    icon = Icons.Filled.List,
+                    text = "Idk"
                 )
                 DrawerItem(
                     onClick = {
@@ -186,6 +188,10 @@ fun DisplayNav(
         composable(route = AppScreen.Start.name) {
             viewModel.titleText = "Jetpack Compose Playground"
             FirstScreen(viewModel)
+        }
+        composable(route = AppScreen.State.name) {
+            viewModel.titleText = "States"
+            StatesScreen()
         }
         composable(route = AppScreen.Calculator.name) {
             viewModel.titleText = "Calculator"

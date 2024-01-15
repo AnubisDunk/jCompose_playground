@@ -37,13 +37,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.anubisdunk.mvvm.FirstScreen
 import com.anubisdunk.mvvm.R
-import com.anubisdunk.mvvm.calculator.CalcViewModel
 import com.anubisdunk.mvvm.calculator.Calculator
 import com.anubisdunk.mvvm.converter.ConverterScreen
 import com.anubisdunk.mvvm.retrofitJokes.JokesScreen
-import com.anubisdunk.mvvm.retrofitJokes.JokesViewModel
-import com.anubisdunk.mvvm.retrofitJokes.api.RetrofitInstance
-import com.anubisdunk.mvvm.retrofitJokes.repo.JokesRepo
 import com.anubisdunk.mvvm.skins.Skins
 import com.anubisdunk.mvvm.states.StatesScreen
 import com.anubisdunk.mvvm.ui.GameViewModel
@@ -58,6 +54,10 @@ enum class AppScreen(@StringRes val title: Int) {
     Jokes(title = R.string.jokesScr)
 
 }
+
+
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

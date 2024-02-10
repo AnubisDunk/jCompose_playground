@@ -1,9 +1,8 @@
 <resources>
-    <string name="app_name">MVVM</string>
-    <string name="calcScr">Calculator Screen</string>
-    <string name="heroesScr">Heroes Screen</string>
-    <string name="converterScr">Converter Screen</string>
-    <string name="jokesScr">Jokes Screen</string>
-    <string name="statesScr">\"State screen\"</string>
+    <string name="app_name">Compose Playground</string>
+    <string name="calcScr">Calculator</string>
+    <string name="converterScr">Math Stuff</string>
+    <string name="jokesScr">Retrofit Jokes</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac ligula malesuada, vestibulum est ut, accumsan est. Donec sagittis pulvinar metus, dignissim vehicula dui fermentum eget. Ut vel nulla nec nisl laoreet condimentum. Pellentesque venenatis a leo placerat sodales. Aenean imperdiet odio eget massa laoreet tincidunt mollis a nulla. Donec ac nibh magna. Vestibulum justo orci, auctor at ex ac, consequat auctor risus. Nullam id velit egestas, maximus ipsum eu, cursus erat. Phasellus eget mauris nec leo ornare pharetra ornare id orci. Donec posuere tortor quis egestas varius. Proin sapien felis, congue vitae aliquam in, convallis a tortor. Mauris varius lorem in sodales luctus. Etiam imperdiet mi eu mauris malesuada, eget ultrices magna posuere. Nunc efficitur non mauris ut mattis. Suspendisse pharetra massa in arcu mattis, a tempus turpis convallis. Nam id lorem at nunc sollicitudin luctus ut quis odio.</string>
+    <string name="other_screen">Misc</string>
 </resources>

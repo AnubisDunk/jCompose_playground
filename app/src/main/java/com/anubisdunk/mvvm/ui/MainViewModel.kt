@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
-class GameViewModel : ViewModel() {
+class MainViewModel : ViewModel() {
 
     var titleText by mutableStateOf("Playground")
     var userInput by mutableStateOf("")

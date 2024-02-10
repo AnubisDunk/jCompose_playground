@@ -1,11 +1,11 @@
+import android.provider.Settings.Global.getString
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.DevicesOther
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Place
@@ -29,6 +29,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -39,36 +40,27 @@ import com.anubisdunk.mvvm.FirstScreen
 import com.anubisdunk.mvvm.R
 import com.anubisdunk.mvvm.calculator.Calculator
 import com.anubisdunk.mvvm.converter.ConverterScreen
+import com.anubisdunk.mvvm.playground.PlaygroundScreen
 import com.anubisdunk.mvvm.retrofitJokes.JokesScreen
-import com.anubisdunk.mvvm.skins.Skins
-import com.anubisdunk.mvvm.states.StatesScreen
-import com.anubisdunk.mvvm.ui.GameViewModel
+import com.anubisdunk.mvvm.ui.MainViewModel
 import kotlinx.coroutines.launch
 
 enum class AppScreen(@StringRes val title: Int) {
     Start(title = R.string.app_name),
-    State(title = R.string.statesScr),
     Calculator(title = R.string.calcScr),
-    Skins(title = R.string.heroesScr),
     Conv(title = R.string.converterScr),
-    Jokes(title = R.string.jokesScr)
+    Jokes(title = R.string.jokesScr),
+    Playground(title = R.string.other_screen )
 
 }
-
-
-
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(
-    modifier: Modifier = Modifier,
-) {
-    val viewModel = viewModel<GameViewModel>()
+fun MainScreen(viewModel : MainViewModel = viewModel<MainViewModel>()) {
+
     val navController = rememberNavController()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
-    var text = viewModel.userInput
+    //var text = viewModel.userInput
 
 
     ModalNavigationDrawer(
@@ -89,16 +81,6 @@ fun MainScreen(
                 )
                 DrawerItem(
                     onClick = {
-                        navController.navigate(AppScreen.State.name)
-                        scope.launch {
-                            drawerState.close()
-                        }
-                    },
-                    icon = Icons.Filled.List,
-                    text = "Idk"
-                )
-                DrawerItem(
-                    onClick = {
                         navController.navigate(AppScreen.Calculator.name)
                         scope.launch {
                             drawerState.close()
@@ -106,16 +88,6 @@ fun MainScreen(
                     },
                     icon = Icons.Filled.Phone,
                     text = "Calculator"
-                )
-                DrawerItem(
-                    onClick = {
-                        navController.navigate(AppScreen.Skins.name)
-                        scope.launch {
-                            drawerState.close()
-                        }
-                    },
-                    icon = Icons.Filled.Face,
-                    text = "Skins"
                 )
                 DrawerItem(
                     onClick = {
@@ -136,6 +108,16 @@ fun MainScreen(
                     },
                     icon = Icons.Filled.Send,
                     text = AppScreen.Jokes.name
+                )
+                DrawerItem(
+                    onClick = {
+                        navController.navigate(AppScreen.Playground.name)
+                        scope.launch {
+                            drawerState.close()
+                        }
+                    },
+                    icon = Icons.Filled.DevicesOther,
+                    text = AppScreen.Playground.name
                 )
             }
         },
@@ -167,7 +149,6 @@ fun MainScreen(
                 modifier = Modifier.padding(it),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-
                 DisplayNav(viewModel, navController)
             }
         }
@@ -176,7 +157,7 @@ fun MainScreen(
 
 @Composable
 fun DisplayNav(
-    viewModel: GameViewModel,
+    viewModel: MainViewModel,
     navController: NavHostController
 ) {
 
@@ -186,28 +167,24 @@ fun DisplayNav(
         startDestination = AppScreen.Start.name
     ) {
         composable(route = AppScreen.Start.name) {
-            viewModel.titleText = "Jetpack Compose Playground"
-            FirstScreen(viewModel)
-        }
-        composable(route = AppScreen.State.name) {
-            viewModel.titleText = "States"
-            StatesScreen()
+            viewModel.titleText = stringResource(id = AppScreen.Start.title)
+            FirstScreen()
         }
         composable(route = AppScreen.Calculator.name) {
-            viewModel.titleText = "Calculator"
+            viewModel.titleText = stringResource(id = AppScreen.Calculator.title)
             Calculator()
         }
-        composable(route = AppScreen.Skins.name) {
-            viewModel.titleText = "Skins"
-            Skins()
-        }
         composable(route = AppScreen.Conv.name) {
-            viewModel.titleText = "Converter"
+            viewModel.titleText = stringResource(id = AppScreen.Conv.title)
             ConverterScreen()
         }
         composable(route = AppScreen.Jokes.name) {
-            viewModel.titleText = "Jokes"
+            viewModel.titleText = stringResource(id = AppScreen.Jokes.title)
             JokesScreen()
+        }
+        composable(route = AppScreen.Playground.name) {
+            viewModel.titleText = stringResource(id = AppScreen.Playground.title)
+            PlaygroundScreen()
         }
     }
 }

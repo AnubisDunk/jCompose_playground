@@ -9,4 +9,5 @@ interface JokesApi {
     @Headers("Accept: application/json")
     @GET(".")
     suspend fun getJoke(): Joke
+
 }

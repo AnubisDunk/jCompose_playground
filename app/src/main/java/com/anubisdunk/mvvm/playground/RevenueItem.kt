@@ -11,6 +11,7 @@ data class Skin (
     val name : String,
     val itemType : String,
     val creatorName : String,
+    val iconUrl : String,
     val subscriptions : Int = 0, //supplyTotalEstimated
     val storePrice : Float
 )
@@ -19,5 +20,6 @@ data class Item (
     val name : String,
     val revenue : String,
     val itemType : String,
+    val iconUrl : String,
     val creatorName : String,
 )

@@ -31,6 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
 
 @Composable
 fun PlaygroundScreen(
@@ -67,7 +68,12 @@ fun PlaygroundScreen(
         } else {
             LazyColumn {
                 items(items.value) { item ->
-                    SkinItem(text = item.name, author = item.creatorName, revenue = item.revenue)
+                    SkinItem(
+                        text = item.name,
+                        author = item.creatorName,
+                        revenue = item.revenue,
+                        image = item.iconUrl
+                    )
                 }
             }
         }
@@ -78,7 +84,8 @@ fun PlaygroundScreen(
 fun SkinItem(
     text: String,
     author: String,
-    revenue: String
+    revenue: String,
+    image: String
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -113,6 +120,10 @@ fun SkinItem(
                     .padding(8.dp)
             )
             AnimatedVisibility(expanded) {
+                AsyncImage(
+                    model = image,
+                    contentDescription = "skin image"
+                )
                 Text(
                     text = "by $author",
                     style = MaterialTheme.typography.bodyLarge,

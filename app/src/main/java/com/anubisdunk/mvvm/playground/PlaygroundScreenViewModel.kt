@@ -40,7 +40,7 @@ class PlaygroundScreenViewModel : ViewModel() {
     fun getStores() {
         viewModelScope.launch {
             val stores = api.getStores()
-            _stores.value = stores.take(10)
+            _stores.value = stores.take(11).drop(1)
         }
     }
 
@@ -56,6 +56,7 @@ class PlaygroundScreenViewModel : ViewModel() {
                     name = item.name,
                     creatorName = item.creatorName,
                     itemType = item.itemType,
+                    iconUrl = item.iconUrl,
                     revenue = calcRevenue(item)
                 )
                 if (newItem.revenue != ".00") {
@@ -63,7 +64,7 @@ class PlaygroundScreenViewModel : ViewModel() {
                 }
 
             }
-            val sorted = newList.sortedBy { it.revenue.toFloat() }
+            val sorted = newList.sortedByDescending { it.revenue.toFloat() }
             _items.value = sorted
         }
     }

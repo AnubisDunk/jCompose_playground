@@ -117,7 +117,7 @@ fun MainScreen(viewModel : MainViewModel = viewModel<MainViewModel>()) {
                         }
                     },
                     icon = Icons.Filled.DevicesOther,
-                    text = AppScreen.Playground.name
+                    text = stringResource(AppScreen.Playground.title)
                 )
             }
         },

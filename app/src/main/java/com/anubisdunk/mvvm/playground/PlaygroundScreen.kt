@@ -53,10 +53,10 @@ fun PlaygroundScreen(
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             Button(onClick = { viewModel.cycleStore(true) }) {
-                Text(text = "Next")
+                Text(text = "Previous week")
             }
             Button(onClick = { viewModel.cycleStore(false) }) {
-                Text(text = "Previous")
+                Text(text = "Next week")
             }
         }
         Text(text = "Current store: ${viewModel.storeId}")
